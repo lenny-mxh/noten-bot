@@ -37,13 +37,13 @@ class SchulnetzBot:
             .send_keys(os.environ.get('USERNAME'))
         self.driver.find_element_by_xpath('//input[@type="submit"]')\
             .click()
-        sleep(2)
+        sleep(8)
 
         self.driver.find_element_by_xpath('//input[@name=\'passwd\']')\
             .send_keys(os.environ.get('PW'))
         self.driver.find_element_by_xpath('//input[@type="submit"]')\
             .click()
-        sleep(2)
+        sleep(5)
 
         # pop-up
         self.driver.find_element_by_xpath('//input[@type="button"]')\
@@ -93,10 +93,10 @@ class SchulnetzBot:
                         link.click()
                         alert = self.driver.switch_to_alert()
                         alert.accept()
-                        sleep(4)
+                        sleep(5)
 
         # get back to home page
-        self.driver.find_element_by_xpath('//*[@id="menu1"]')
+        # self.driver.find_element_by_xpath('//*[@id="menu1"]')
     
     def send_message(self):
         # get the grade
