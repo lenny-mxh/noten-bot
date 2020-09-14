@@ -34,7 +34,7 @@ class SchulnetzBot:
 
         # log in
         self.driver.find_element_by_xpath("//input[@name=\"loginfmt\"]")\
-            .send_keys(os.envrion.get('USERNAME'))
+            .send_keys(os.environ.get('USERNAME'))
         self.driver.find_element_by_xpath('//input[@type="submit"]')\
             .click()
         sleep(2)
