@@ -121,9 +121,9 @@ class SchulnetzBot:
         else:
             print('Keine neue Noten!')
         
-        self.driver.close()
-        
 
-if __name__ == '__main__':
-    bot = SchulnetzBot()
-    print(bot.send_message())
+bot = SchulnetzBot()
+while True:
+    bot.send_message()
+    bot._refresh()
+    sleep(600)
