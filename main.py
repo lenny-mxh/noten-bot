@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.options import Options
 
 
 class SchulnetzBot:
-    url = 'https://api.telegram.org/bot1206066782:AAHKDt7cW793myZCuqL8eDswV-Ji2hZB-xc/'
+    url = f'https://api.telegram.org/bot{os.environ.get('TELEGRAM_API_KEY')}/'
 
     def __init__(self):
         self.options = Options()
@@ -17,12 +17,12 @@ class SchulnetzBot:
         self.options.add_argument('disable-infobars') 
         self.options.add_experimental_option("detach", True)
 
-        # make selenium headless -> heroku
+        # make selenium headless -> for deployment
         self.options.add_argument('--headless')
         self.options.add_argument('--disable-dev-shm-usage')
         self.options.add_argument('--no-sandbox')
         
-        # avoid chrome controlled by automated software (config)
+        # avoid chrome controlled by automated software -> config
         self.driver = webdriver.Chrome(
             options=self.options, 
             executable_path=os.environ.get('CHROMEDRIVER_PATH')
@@ -49,7 +49,7 @@ class SchulnetzBot:
         self.driver.find_element_by_xpath('//input[@type="button"]')\
             .click()
         
-    def _refresh(self):
+    def refresh(self):
         time_button = self.driver.find_element_by_xpath('//*[@id="sn-timer"]')
         time_button.click()
         
@@ -106,7 +106,7 @@ class SchulnetzBot:
             fach = data['Fach']
             note = data['Note']
 
-            # change fra to französisch
+            # change fra to französisch for example
             edited_fach = evaluate(fach)
             message = f'Neue Note im Fach {edited_fach}!\nDu hast eine {note} :)'
 
@@ -125,5 +125,5 @@ class SchulnetzBot:
 bot = SchulnetzBot()
 while True:
     bot.send_message()
-    bot._refresh()
+    bot.refresh()
     sleep(600)
